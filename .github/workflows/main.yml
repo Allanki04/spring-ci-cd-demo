@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/*.jar,Dockerfile"
-          target: "/home/ubuntu/spring-app"
+          target: "/home/ec2-user/spring-app"
 
       - name: Build and Run Docker on EC2
         uses: appleboy/ssh-action@master
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-             cd /home/ubuntu/spring-app
+             cd /home/ec2-user/spring-app
              docker stop spring-app || true
              docker rm spring-app || true
              docker build -t spring-ci-cd-demo:latest .
