@@ -19,8 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Give execute permission
+        run: chmod +x mvnw
+
       - name: Build with Maven
-        run: mvnw clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
 
       - name: Copy files to EC2
         uses: appleboy/scp-action@master
