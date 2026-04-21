@@ -42,10 +42,10 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
              cd /home/ec2-user/spring-app
-             docker stop spring-app || true
-             docker rm spring-app || true
-             docker build -t spring-ci-cd-demo:latest .
-             docker run -d --name spring-app -p 8080:8080 spring-ci-cd-demo:latest
+             sudo docker stop spring-app || true
+             sudo docker rm spring-app || true
+             sudo docker build -t spring-ci-cd-demo:latest .
+             sudo docker run -d --name spring-app -p 8080:8080 spring-ci-cd-demo:latest
 
 
         
