@@ -44,8 +44,8 @@ jobs:
              cd /home/ec2-user/spring-app
              sudo docker stop spring-app || true
              sudo docker rm spring-app || true
-             sudo docker build -t spring-ci-cd-demo:latest .
-             sudo docker run -d --name spring-app -p 8080:8080 spring-ci-cd-demo:latest
+             sudo docker build -t spring-ci-cd-image .
+             sudo docker run -d --name spring-app -p 8080:8080 spring-ci-cd-image
 
 
         
