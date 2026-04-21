@@ -1,0 +1,35 @@
+name: ecr-workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Give execute permission
+        run: chmod +x mvnw
+
+      - name: Build with Maven
+        run: ./mvnw clean package -DskipTests
+
+      - name: Build docker image
+        run: sudo docker build -t ci-cd-image .
+
+      - name: Push Image to ECR repo
+        run: aws ecr get-login-password --region ${{secrets.AWS_REGION}} \
+          | sudo docker login --username AWS --password-stdin 340290106258.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com \
+            sudo docker tag ci-cd-image 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2 \
+            sudo docker push 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2
