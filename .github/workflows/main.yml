@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-             cd /home/ec2-user/spring-app
+             cd /home/ec2-user
              sudo docker stop spring-app || true
              sudo docker rm spring-app || true
              sudo docker build -t spring-ci-cd-image .
