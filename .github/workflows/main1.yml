@@ -31,5 +31,5 @@ jobs:
       - name: Push Image to ECR repo
         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} \
           | sudo docker login --username AWS --password-stdin 340290106258.dkr.ecr.${{secrets.AWS_REGION}}.amazonaws.com
-            sudo docker tag ci-cd-image 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2
-            sudo docker push 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2
+          sudo docker tag ci-cd-image 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2
+          sudo docker push 340290106258.dkr.ecr.ap-south-1.amazonaws.com/bluegreen-app:v2
